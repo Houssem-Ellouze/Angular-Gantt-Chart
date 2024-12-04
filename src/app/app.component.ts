@@ -1,14 +1,34 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {GanttModule} from '@syncfusion/ej2-angular-gantt';
 
+import { Component } from '@angular/core';
+import { projectNewData } from '../data';
+import {GanttModule} from '@syncfusion/ej2-angular-gantt';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,GanttModule],
   templateUrl: './app.component.html',
   standalone: true,
-  styleUrl: './app.component.css'
+  imports: [
+    GanttModule
+  ],
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Angular-Gantt-Chart';
-}
+  title = 'my-angular-project';
+  public data: object[] = projectNewData;
+  public timelineView: object = {timelineViewMode:"Week"} //Default one.
+  public columnSettings: object[] = [
+    {field: "TaskID", headerText: "Task ID"},
+    {field: "TaskName", headerText: "Task Name"},
+    {field: "StartDate", headerText: "StartDate", format: "dd-MMM-yy"},
+    {field: "Duration", textAlign: "Right"},
+  ]
+  public taskSettings: object = {
+    id: "TaskID",
+    name: "TaskName",
+    startDate: "StartDate",
+    endDate: "EndDate",
+    duration: "Duration",
+    progress: "Progress",
+    child: "subtasks",
+    dependency: "Predecessor"
+  }
+};
